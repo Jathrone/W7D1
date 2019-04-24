@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
   entry: './frontend/todos_entry.jsx',
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, "app", "assets", "javascripts"),
     filename: 'bundle.js'
   },
   module: {

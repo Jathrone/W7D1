@@ -4,12 +4,24 @@ const TodoListItem = ({todo}) => {
   return <li>{todo.title}</li>
 };
 
-export const TodoListIndex = ({receiveTodo, todos}) => {
-  return (
-  <ul>
-    {todos.map((todo) => (
-      <TodoListItem key={todo.id} todo={todo} />
-    ))}
-  </ul>
-    ); 
+export class TodoListIndex extends React.Component {
+  
+  constructor (props) {
+    super(props);
+  }
+
+  componentDidMount () {
+    this.props.fetchTodos()
+  }
+  
+  render () {
+    return (
+    <ul>
+      {this.props.todos.map((todo) => (
+        <TodoListItem key={todo.id} todo={todo} />
+      ))}
+    </ul>
+      ); 
+  }
+
 }

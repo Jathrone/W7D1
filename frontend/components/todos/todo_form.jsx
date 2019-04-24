@@ -1,7 +1,6 @@
 import React from "react";
 
 const initialState = {
-  id: new Date().getTime(),
   title: '',
   body: ''
 }
@@ -20,6 +19,11 @@ class TodoForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <h3>ADD TO-DO:</h3>
+        <ul>
+          {this.props.errors && this.props.errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
         <label htmlFor="title">Title:</label>
         <input 
           type="text"
@@ -41,12 +45,12 @@ class TodoForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.receiveTodo(this.state)
-    this.resetState()
+    this.props.createTodo(this.state).then( () => this.resetState() )
   }
 
   resetState() {
     this.setState(initialState)
+    this.props.clearErrors()
   }
 
   updateBody(e) {
